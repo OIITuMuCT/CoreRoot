@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     
     "core",
     "core.user",
+    "core.auth",
     "rest_framework",
     "rest_framework_simplejwt",
 ]
