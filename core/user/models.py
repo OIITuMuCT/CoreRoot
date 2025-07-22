@@ -67,8 +67,8 @@ class User(AbstractBaseUser, PermissionsMixin):
     is_active = models.BooleanField(default=True)
     is_superuser = models.BooleanField(default=False)
 
-    # bio = models.TextField(null=True)
-    # avatar = models.ImageField(null=True)
+    bio = models.TextField(null=True)
+    avatar = models.ImageField(null=True)
 
     created = models.DateTimeField(auto_now=True)
     updated = models.DateTimeField(auto_now_add=True)
