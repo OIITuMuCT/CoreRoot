@@ -1,10 +1,16 @@
 from rest_framework import routers
 from core.user.viewsets import UserViewSet
 from core.auth.viewsets import RegisterViewSet, LoginViewSet, RefreshViewSet
-
+from core.post.viewsets import PostViewSet
 
 
 router = routers.SimpleRouter()
+
+# ##################################################################### #
+# ################### POST                       ###################### #
+# ##################################################################### #
+
+router.register(r'post', PostViewSet, basename='post')
 
 # ##################################################################### #
 # ################### AUTH                       ###################### #

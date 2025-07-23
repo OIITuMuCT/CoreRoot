@@ -3,6 +3,7 @@ from core.abstract.serializers import AbstractSerializer
 
 from core.user.models import User
 
+
 class UserSerializer(AbstractSerializer):
     id = serializers.UUIDField(source='public_id',
         read_only=True, format='hex')
@@ -12,6 +13,6 @@ class UserSerializer(AbstractSerializer):
     class Meta:
         model = User
         fields = ['id', 'username', 'first_name',
-                  'last_name','email',
+                  'last_name','email', 'bio', 'avatar',
                   'is_active', 'created', 'updated']
         read_only_field = ['is_active']
