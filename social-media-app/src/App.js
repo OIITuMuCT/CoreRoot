@@ -3,6 +3,7 @@ import React from "react";
 import { Route, Routes } from "react-router-dom";
 import ProtectedRoute from "./routes/ProtectedRoute";
 import Registration from "./pages/Registration";
+import Login from "./pages/Login";
 import Home from "./pages/Home";
 import Counter from './pages/Counter';
 import Form from "./pages/handling-form";
@@ -19,8 +20,8 @@ function App() {
           </ProtectedRoute>
         }
       />
-      <Route path="/login/" element={<div>Login</div>} />
       <Route path="/register/" element={<Registration />} />
+      <Route path="/login/" element={<Login />} />
       <Route path="/count" element={<Counter />} />
       <Route path="/form" element={<Form />} />
       <Route path="/form2" element={<Form2 />} />
