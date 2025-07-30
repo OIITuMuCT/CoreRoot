@@ -3,6 +3,7 @@ import { Button, Modal, Form } from "react-bootstrap";
 
 import axiosService from "../../helpers/axios";
 import { getUser } from "../../hooks/user.actions";
+import Toaster from "../Toaster";
 
 function CreatePost() {
     const [show, setShow] = useState(false);
@@ -12,6 +13,10 @@ function CreatePost() {
     const [form, setForm] = useState({});
 
     const user = getUser();
+
+    const [showToast, setShowToast] = useState(false);
+    const [toastMessage, setToastMessage] = useState("");
+    const [toastType, setToastType] = useState("");
 
     const handleSubmit = (event) => {
         event.preventDefault();
@@ -32,10 +37,14 @@ function CreatePost() {
             .post("/post/", data)
             .then(() => {
                 handleClose();
+                setToastMessage("Post created 🚀");
+                setToastType('success');
                 setForm({});
+                setShowToast(true);
             })
             .catch((error) => {
-                console.log(error);
+                setToastMessage("An error occurred.");
+                setToastType("danger");
             });
     };
 
@@ -71,11 +80,18 @@ function CreatePost() {
             <Modal.Footer>
                 <Button variant="primary"
                     onClick={handleSubmit}
-                    disabled={form.body === underined}>
+                    disabled={form.body === undefined}>
                     Post
                 </Button>
             </Modal.Footer>
         </Modal>
+        <Toaster 
+            title="Post!"
+            message={toastMessage}
+            showToast={showToast}
+            type={toastType}
+            onClose={() => setShowToast(false)}
+        />
         </>
     );
 }
