@@ -1,13 +1,10 @@
-import './App.css';
 import React from "react";
 import { Route, Routes } from "react-router-dom";
 import ProtectedRoute from "./routes/ProtectedRoute";
+import Home from "./pages/Home";
 import Registration from "./pages/Registration";
 import Login from "./pages/Login";
-import Home from "./pages/Home";
-import Counter from './pages/Counter';
-import Form from "./pages/handling-form";
-import Form2 from "./pages/form2";
+import SinglePost from "./pages/SinglePost";
 
 function App() {
   return (
@@ -20,12 +17,18 @@ function App() {
           </ProtectedRoute>
         }
       />
-      <Route path="/register/" element={<Registration />} />
+      <Route
+        path="/post/:postId/"
+        element={
+          <ProtectedRoute>
+            <SinglePost />
+          </ProtectedRoute>
+        }
+      />
       <Route path="/login/" element={<Login />} />
-      <Route path="/count" element={<Counter />} />
-      <Route path="/form" element={<Form />} />
-      <Route path="/form2" element={<Form2 />} />
+      <Route path="/register/" element={<Registration />} />
     </Routes>
   );
 }
+
 export default App;
