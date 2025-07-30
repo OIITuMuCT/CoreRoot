@@ -8,6 +8,8 @@ import { getUser } from "../hooks/user.actions";
 import { Post } from "../components/posts";
 import CreatePost from "../components/posts/CreatePost";
 import Profile from "../components/Profile";
+import ProfileCard from "../components/profile/ProfileCard";
+
 
 function Home() {
   const posts = useSWR("/post/", fetcher, {
