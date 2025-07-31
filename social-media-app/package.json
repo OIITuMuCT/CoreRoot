@@ -15,7 +15,7 @@
     "react": "^18.0.0",
     "react-bootstrap": "^2.7.0",
     "react-dom": "^18.0.0",
-    "react-router-dom": "^6.6.2",
+    "react-router-dom": "6",
     "react-scripts": "5.0.1",
     "swr": "^2.0.0",
     "timeago.js": "^4.0.2",
@@ -44,5 +44,14 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "@faker-js/faker": "^9.9.0",
+    "jest-localstorage-mock": "^2.4.26",
+    "react-test-renderer": "^19.1.1",
+    "uuid": "^11.1.0"
+  },
+  "jest": {
+    "resetMocks": false
   }
 }

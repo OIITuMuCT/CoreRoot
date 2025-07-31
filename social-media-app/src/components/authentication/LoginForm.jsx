@@ -6,7 +6,7 @@ import { useUserActions } from "../../hooks/user.actions";
 function LoginForm() {
   const [validated, setValidated] = useState(false);
   const [form, setForm] = useState({
-    // username: "",
+    username: "",
     email:"",
     password: "",
   });
@@ -43,11 +43,13 @@ function LoginForm() {
       noValidate
       validated={validated}
       onSubmit={handleSubmit}
+      data-testid="login-form"
     >
-      {/* <Form.Group className="mb-3">
+      <Form.Group className="mb-3">
         <Form.Label>Username</Form.Label>
         <Form.Control
           value={form.username}
+          data-testing="username-field"
           onChange={(e) => setForm({ ...form, username: e.target.value })}
           required
           type="text"
@@ -56,7 +58,7 @@ function LoginForm() {
         <Form.Control.Feedback type="invalid">
           This file is required.
         </Form.Control.Feedback>
-      </Form.Group> */}
+      </Form.Group>
             <Form.Group className="mb-3">
               <Form.Label>Email address</Form.Label>
               <Form.Control
@@ -75,6 +77,7 @@ function LoginForm() {
         <Form.Label>Password</Form.Label>
         <Form.Control
           value={form.password}
+          data-testid="password-field"
           minLength="8"
           onChange={(e) => setForm({ ...form, password: e.target.value })}
           required

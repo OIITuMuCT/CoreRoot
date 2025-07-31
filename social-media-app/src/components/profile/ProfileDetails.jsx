@@ -1,7 +1,7 @@
 import React from "react";
 import { Button, Image } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
-import { getUser } from "../../hooks/user.actions";
+// import { getUser } from "../../hooks/user.actions";
 import { randomAvatar } from "../../utils";
 
 function ProfileDetails(props) {
