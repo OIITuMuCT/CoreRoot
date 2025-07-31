@@ -15,7 +15,6 @@ function Post(props) {
   const { setToaster } = useContext(Context);
 
   const user = getUser();
-
   const handleLikeClick = (action) => {
     axiosService
       .post(`/post/${post.id}/${action}/`)

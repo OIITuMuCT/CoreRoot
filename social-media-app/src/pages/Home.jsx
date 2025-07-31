@@ -52,7 +52,7 @@ function Home() {
           <div className="d-flex flex-column">
             {profiles.data &&
               profiles.data.results.map((profile, index) => (
-                <Profile key={index} user={profile} />
+                <ProfileCard key={index} user={profile} />
               ))}
           </div>
         </Col>
