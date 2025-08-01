@@ -1,51 +1,47 @@
-import React, { useState, useContext } from "react";
-import { Button, Modal, Form } from "react-bootstrap";
+import React, { useContext, useState } from "react";
+import { Button, Modal, Form, Dropdown } from "react-bootstrap";
 import axiosService from "../../helpers/axios";
-import { getUser } from "../../hooks/user.actions";
 import { Context } from "../Layout";
 
-function CreatePost(props) {
-  const { refresh } = props;
+function UpdatePost(props) {
+  const { post, refresh } = props;
   const [show, setShow] = useState(false);
   const [validated, setValidated] = useState(false);
   const [form, setForm] = useState({
-    author: "",
-    body: "",
+    author: post.author.id,
+    body: post.body,
   });
 
   const { setToaster } = useContext(Context);
-
-  const user = getUser();
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    const createPostForm = event.currentTarget;
+    const updatePostForm = event.currentTarget;
 
-    if (createPostForm.checkValidity() === false) {
+    if (updatePostForm.checkValidity() === false) {
       event.stopPropagation();
     }
 
     setValidated(true);
 
     const data = {
-      author: user.id,
+      author: form.author,
       body: form.body,
     };
 
     axiosService
-      .post("/post/", data)
+      .put(`/post/${post.id}/`, data)
       .then(() => {
         handleClose();
         setToaster({
           type: "success",
-          message: "Post created 🚀",
+          message: "Post updated 🚀",
           show: true,
-          title: "Post Success",
+          title: "Success!",
         });
-        setForm({});
         refresh();
       })
       .catch(() => {
@@ -60,32 +56,26 @@ function CreatePost(props) {
 
   return (
     <>
-      <Form.Group className="my-3 w-75">
-        <Form.Control
-          className="py-2 rounded-pill border-primary text-primary"
-          data-testid="show-modal-form"
-          type="text"
-          placeholder="Write a post"
-          onClick={handleShow}
-        />
-      </Form.Group>
+      <Dropdown.Item data-testid="show-modal-form" onClick={handleShow}>
+        Modify
+      </Dropdown.Item>
 
       <Modal show={show} onHide={handleClose}>
         <Modal.Header closeButton className="border-0">
-          <Modal.Title>Create Post</Modal.Title>
+          <Modal.Title>Update Post</Modal.Title>
         </Modal.Header>
         <Modal.Body className="border-0">
           <Form
             noValidate
             validated={validated}
             onSubmit={handleSubmit}
-            data-testid="create-post-form"
+            data-testid="update-post-form"
           >
             <Form.Group className="mb-3">
               <Form.Control
                 name="body"
-                data-testid="post-body-field"
                 value={form.body}
+                data-testid="post-body-field"
                 onChange={(e) => setForm({ ...form, body: e.target.value })}
                 as="textarea"
                 rows={3}
@@ -95,12 +85,11 @@ function CreatePost(props) {
         </Modal.Body>
         <Modal.Footer>
           <Button
+            data-testid="update-post-submit"
             variant="primary"
             onClick={handleSubmit}
-            disabled={!form.body}
-            data-testid="create-post-submit"
           >
-            Post
+            Modify
           </Button>
         </Modal.Footer>
       </Modal>
@@ -108,4 +97,4 @@ function CreatePost(props) {
   );
 }
 
-export default CreatePost;
+export default UpdatePost;
